@@ -1,0 +1,130 @@
+/* Main page background */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f1f8e9, #f3f4f7); /* Soft pastel gradient */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for content */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Buttons and inputs styling */
+button, select, input {
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Back to Home button styling */
+#backToHomeBtn {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    background-color: #ff5733;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1000;
+    display: block; /* Make sure it's visible */
+}
+
+#backToHomeBtn:hover {
+    background-color: #d94320;
+}
+
+
+/* Search section background */
+#searchSection {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Library section background */
+#libraryPage {
+    display: block !important;
+    background: linear-gradient(135deg, #d1c4e9, #e8eaf6); /* Different, but still subtle */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Book card styling */
+.book-card {
+    display: block;
+    background-color: white;
+    margin: 15px 0;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.book-card img {
+    width: 80px;
+    height: 120px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.book-card .book-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.book-card p {
+    margin: 5px 0;
+}
+
+/* Save button */
+.save-btn {
+    background-color: #8c9eff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.save-btn:hover {
+    background-color: #6f7cff;
+}
+
+/* Remove button in library section */
+.remove-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.remove-btn:hover {
+    background-color: #d32f2f;
+}
+
+#inProgressBooks, #finishedBooks, #savedBooks {
+    display: block !important;
+    opacity: 1 !important;
+    color: black !important;
+    background: white !important;
+}
+
