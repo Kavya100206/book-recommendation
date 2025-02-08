@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Home Page -->
+    <div id="homePage">
+        <div class="container">
+            <input type="text" id="searchInput" placeholder="Search books...">
+            <select id="genreSelect">
+                <option value="none">Select Genre</option>
+                <option value="fiction">Fiction</option>
+                <option value="nonfiction">Non-fiction</option>
+                <option value="mystery">Mystery</option>
+                <option value="fantasy">Fantasy</option>
+            </select>
+            <select id="ratingSelect">
+                <option value="none">Select Rating</option>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+            </select>
+            <button id="searchBtn">Search</button>
+        </div>
+    </div>
+
+    <!-- Button to go back to the home page -->
+    <button id="backToHomeBtn" style="display: none;">Back to Home</button>
+
+    <!-- Results Page -->
+    <div id="resultsPage" style="display: none;">
+        <div id="results"></div>
+    </div>
+
+    <!-- Library Page -->
+    <div id="libraryPage" style="display:none;">
+        <button id="inProgressTab">In Progress</button>
+        <button id="finishedTab">Finished</button>
+        <button id="savedTab">Saved</button>
+        <div id="inProgressBooks"></div>
+        <div id="finishedBooks"></div>
+        <div id="savedBooks"></div>
+    </div>
+
+    <button id="libraryBtn">Open Library</button>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
