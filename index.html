@@ -8,48 +8,59 @@
 </head>
 <body>
 
-    <!-- Home Page -->
-    <div id="homePage">
-        <div class="container">
-            <input type="text" id="searchInput" placeholder="Search books...">
-            <select id="genreSelect">
-                <option value="none">Select Genre</option>
-                <option value="fiction">Fiction</option>
-                <option value="nonfiction">Non-fiction</option>
-                <option value="mystery">Mystery</option>
-                <option value="fantasy">Fantasy</option>
-            </select>
-            <select id="ratingSelect">
-                <option value="none">Select Rating</option>
-                <option value="5">5 stars</option>
-                <option value="4">4 stars</option>
-                <option value="3">3 stars</option>
-            </select>
-            <button id="searchBtn">Search</button>
-        </div>
-    </div>
+    <!-- Header Section -->
+    <header id="banner">
+        <h1>📚 Find Your Next Read</h1>
+    </header>
 
-    <!-- Button to go back to the home page -->
-    <button id="backToHomeBtn" style="display: none;">Back to Home</button>
+    <!-- Home Page -->
+    <main id="homePage">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for books...">
+                <select id="genreSelect">
+                    <option value="none">Select Genre</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="nonfiction">Non-fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="fantasy">Fantasy</option>
+                </select>
+                <select id="ratingSelect">
+                    <option value="none">Select Rating</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                </select>
+                <button id="searchBtn">🔍 Search</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Back to Home Button -->
+    <button id="backToHomeBtn" class="hidden">⬅ Back to Home</button>
 
     <!-- Results Page -->
-    <div id="resultsPage" style="display: none;">
-        <div id="results"></div>
-    </div>
+    <section id="resultsPage" class="hidden">
+        <div id="results" class="book-grid"></div>
+    </section>
 
-    <!-- Library Page -->
-    <div id="libraryPage" style="display:none;">
-        <button id="inProgressTab">In Progress</button>
-        <button id="finishedTab">Finished</button>
-        <button id="savedTab">Saved</button>
-        <div id="inProgressBooks"></div>
-        <div id="finishedBooks"></div>
-        <div id="savedBooks"></div>
-    </div>
+    <!-- Library Section -->
+    <section id="libraryPage" class="hidden">
+        <div class="library-buttons">
+            <button id="inProgressTab">📖 In Progress</button>
+            <button id="finishedTab">✅ Finished</button>
+            <button id="savedTab">🔖 Saved</button>
+        </div>
+        <div id="libraryContent">
+            <div id="inProgressBooks" class="book-list"></div>
+            <div id="finishedBooks" class="book-list hidden"></div>
+            <div id="savedBooks" class="book-list hidden"></div>
+        </div>
+    </section>
 
-    <button id="libraryBtn">Open Library</button>
-    
+    <!-- Open Library Button -->
+    <button id="libraryBtn">📚 Open Library</button>
+
     <script src="script.js"></script>
 </body>
-
 </html>
