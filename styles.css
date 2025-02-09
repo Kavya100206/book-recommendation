@@ -1,130 +1,169 @@
-/* Main page background */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f1f8e9, #f3f4f7); /* Soft pastel gradient */
-    color: #333;
+    font-family: 'Poppins', sans-serif;
+    background: #22223B; /* Space Cadet */
+    color: #F2E9E4; /* Isabelline */
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
-/* Container for content */
-.container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Header */
+#banner {
+    background: linear-gradient(to right, #4A4E69, #22223B); /* Independence to Space Cadet */
     padding: 20px;
+    color: #F2E9E4; /* Isabelline */
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Buttons and inputs styling */
-button, select, input {
-    font-size: 16px;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+/* Search Box */
+.search-box {
+    background: #4A4E69; /* Independence */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+}
+
+.search-box input, .search-box select, .search-box button {
+    width: 90%;
+    padding: 12px;
+    margin: 8px 0;
     border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
 }
 
-/* Back to Home button styling */
+.search-box input {
+    background: #F2E9E4; /* Isabelline */
+    color: #22223B; /* Space Cadet */
+}
+
+.search-box select {
+    background: #9A8C98; /* Old Lavender */
+    color: #F2E9E4; /* Isabelline */
+}
+
+.search-box button {
+    background: #C9ADA7; /* Silver Pink */
+    color: #22223B; /* Space Cadet */
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-box button:hover {
+    background: #9A8C98; /* Old Lavender */
+}
+
+/* Back to Home Button */
 #backToHomeBtn {
     position: fixed;
-    top: 10px;
+    top: 20px;
     left: 20px;
-    background-color: #ff5733;
-    color: white;
+    background: #C9ADA7; /* Silver Pink */
+    color: #22223B; /* Space Cadet */
     padding: 10px 15px;
-    border: none;
     border-radius: 5px;
-    font-size: 14px;
     cursor: pointer;
-    z-index: 1000;
-    display: block; /* Make sure it's visible */
+    display: none;
 }
 
 #backToHomeBtn:hover {
-    background-color: #d94320;
+    background: #9A8C98; /* Old Lavender */
 }
 
-
-/* Search section background */
-#searchSection {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Library section background */
+/* Library Section */
 #libraryPage {
-    display: block !important;
-    background: linear-gradient(135deg, #d1c4e9, #e8eaf6); /* Different, but still subtle */
+    background: #4A4E69; /* Independence */
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Book card styling */
+.library-buttons button {
+    background: #9A8C98; /* Old Lavender */
+    color: #F2E9E4; /* Isabelline */
+    margin: 10px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.library-buttons button:hover {
+    background: #C9ADA7; /* Silver Pink */
+    color: #22223B; /* Space Cadet */
+}
+
+/* Book Grid */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Book Cards */
 .book-card {
-    display: block;
-    background-color: white;
-    margin: 15px 0;
+    background: #F2E9E4; /* Isabelline */
+    color: #22223B; /* Space Cadet */
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    align-items: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
 }
 
-.book-card img {
-    width: 80px;
-    height: 120px;
-    margin-right: 15px;
-    border-radius: 5px;
+.book-card:hover {
+    transform: scale(1.05);
 }
 
-.book-card .book-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.book-card h3 {
-    font-size: 18px;
-    margin: 0;
-}
-
-.book-card p {
-    margin: 5px 0;
-}
-
-/* Save button */
-.save-btn {
-    background-color: #8c9eff;
-    color: white;
-    padding: 8px 15px;
+/* Save & Remove Buttons */
+.save-btn, .remove-btn {
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    border: none;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.save-btn {
+    background: #9A8C98; /* Old Lavender */
+    color: #F2E9E4; /* Isabelline */
 }
 
 .save-btn:hover {
-    background-color: #6f7cff;
+    background: #4A4E69; /* Independence */
 }
 
-/* Remove button in library section */
 .remove-btn {
-    background-color: #f44336;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
+    background: #C9ADA7; /* Silver Pink */
+    color: #22223B; /* Space Cadet */
 }
 
 .remove-btn:hover {
-    background-color: #d32f2f;
+    background: #9A8C98; /* Old Lavender */
+    color: #F2E9E4; /* Isabelline */
 }
 
-#inProgressBooks, #finishedBooks, #savedBooks {
-    display: block !important;
-    opacity: 1 !important;
-    color: black !important;
-    background: white !important;
+/* Hidden Elements */
+.hidden {
+    display: none;
 }
-
