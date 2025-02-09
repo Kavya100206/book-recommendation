@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const libraryBtn = document.getElementById("libraryBtn");
     const backToHomeBtn = document.getElementById("backToHomeBtn");
@@ -9,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         backToHomeBtn.style.display = "block"; // Show Back to Home in Library
         backToHomeBtn.style.position = "absolute";
         backToHomeBtn.style.top = "10px";
-        backToHomeBtn.style.right = "10px"; // Moves it to the right corner
+        backToHomeBtn.style.right = "20px"; // Moves it to the right corner
         backToHomeBtn.style.left = "auto"; // Ensures it's not aligned to the left
         backToHomeBtn.style.width = "120px"; // Small rectangular size
         backToHomeBtn.style.height = "50px";
@@ -255,24 +257,14 @@ function displayLibraryBooks(activeSection = "all") {
     }
 }
 
+const tabs = ["inProgress", "finished", "saved"];
 
-
-
-
-// Event listeners for switching between sections
-document.getElementById("inProgressTab").addEventListener("click", function () {
-    console.log("In Progress button clicked!");
-    displayLibraryBooks("inProgress");
+tabs.forEach((tab) => {
+    document.getElementById(`${tab}Tab`).addEventListener("click", function () {
+        if (tab === "inProgress") console.log("In Progress button clicked!");
+        displayLibraryBooks(tab);
+    });
 });
-
-document.getElementById("finishedTab").addEventListener("click", function () {
-    displayLibraryBooks("finished");
-});
-
-document.getElementById("savedTab").addEventListener("click", function () {
-    displayLibraryBooks("saved");
-});
-
 
 // Function to move books between sections
 function updateBookProgress(title, newProgress) {
@@ -288,7 +280,6 @@ function updateBookProgress(title, newProgress) {
     localStorage.setItem("library", JSON.stringify(books));
     displayLibraryBooks(); // Refresh the UI
 }
-
 
 // Create a book card for library display
 function createBookCard(book) {
@@ -351,19 +342,34 @@ function saveToInProgress(book) {
     displayLibraryBooks(); // Ensure UI updates
 }
 
+const library = {
+    saved: [],
+    inProgress: [],
+    finished: []
+};
 
-
-function moveToInProgress(bookId) {
-    let savedBooks = JSON.parse(localStorage.getItem("library")) || [];
-
-    let book = savedBooks.find(b => b.id === bookId);
-    if (book) {
-        book.progress = 1; // Update progress instead of moving it to a new array
-        localStorage.setItem("library", JSON.stringify(savedBooks));
-        displayLibraryBooks();
-    } else {
-        console.error("Book not found in library.");
-    }
+function updateDisplayedBooks() {
+    const sections = ['saved', 'inProgress', 'finished'];
+    sections.forEach(section => {
+        const container = document.getElementById(section + '-books');
+        container.innerHTML = '';
+        library[section].forEach(book => {
+            const bookElement = document.createElement('div');
+            bookElement.classList.add('book');
+            bookElement.innerHTML = `
+                <p>${book.title}</p>
+                <button onclick="removeFromLibrary('${book.id}', '${section}')">REMOVE FROM LIBRARY</button>
+            `;
+            
+            if (section === 'saved') {
+                bookElement.innerHTML += `<button onclick="moveToInProgress('${book.id}')">SAVE TO IN PROGRESS</button>`;
+            } else if (section === 'inProgress') {
+                bookElement.innerHTML += `<button onclick="moveToFinished('${book.id}')">SAVE TO FINISHED</button>`;
+            }
+            
+            container.appendChild(bookElement);
+        });
+    });
 }
 
 
@@ -381,6 +387,7 @@ function saveToFinished(book) {
     displayLibraryBooks(); // Update library display
 }
 
+
 // Remove book from library
 function removeFromLibrary(title) {
     let savedBooks = JSON.parse(localStorage.getItem("library")) || [];
@@ -391,59 +398,7 @@ function removeFromLibrary(title) {
     alert("Book removed from your library!");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const libraryBtn = document.getElementById("libraryBtn");
-    const backToHomeBtn = document.getElementById("backToHomeBtn");
-    
-    libraryBtn.addEventListener("click", function () {
-        document.getElementById("libraryPage").style.display = "block";
-        document.getElementById("homePage").style.display = "none";
-        document.getElementById("resultsPage").style.display = "none";
-        backToHomeBtn.style.display = "block"; // Show Back to Home in Library
-        backToHomeBtn.style.position = "absolute";
-        backToHomeBtn.style.top = "10px";
-        backToHomeBtn.style.right = "10px";
-        backToHomeBtn.style.width = "120px";
-        backToHomeBtn.style.height = "40px";
-        showCategory("inProgress");
-    });
 
-    backToHomeBtn.addEventListener("click", function () {
-        document.getElementById("libraryPage").style.display = "none";
-        document.getElementById("resultsPage").style.display = "none";
-        document.getElementById("homePage").style.display = "block";
-        backToHomeBtn.style.display = "none";
-    });
-
-    document.getElementById("searchBtn").addEventListener("click", function () {
-        document.getElementById("homePage").style.display = "none";
-        document.getElementById("resultsPage").style.display = "block";
-        backToHomeBtn.style.display = "block";
-        backToHomeBtn.style.position = "absolute";
-        backToHomeBtn.style.top = "10px";
-        backToHomeBtn.style.right = "10px";
-        backToHomeBtn.style.width = "120px"; // Small rectangular size
-        backToHomeBtn.style.height = "40px";
-        searchBooks();
-    });
-
-    document.getElementById("inProgressTab").addEventListener("click", function () {
-        showCategory('inProgress');
-    });
-    document.getElementById("finishedTab").addEventListener("click", function () {
-        showCategory('finished');
-    });
-    document.getElementById("savedTab").addEventListener("click", function () {
-        showCategory('saved');
-    });
-
-    displayLibraryBooks();
-});
-
-window.onload = function () {
-    displayLibraryBooks();
-    showCategory('inProgress');
-};
 
 function updateBookProgress(title, newProgress) {
     let books = JSON.parse(localStorage.getItem("library")) || [];
@@ -469,33 +424,22 @@ function updateBookProgress(title, newProgress) {
 
 
 function showCategory(category) {
+    console.log(`Showing category: ${category}`); // Debugging log
+
     document.getElementById("inProgressBooks").style.display = "none";
     document.getElementById("finishedBooks").style.display = "none";
     document.getElementById("savedBooks").style.display = "none";
 
     let activeSection = document.getElementById(`${category}Books`);
-    activeSection.style.display = "block";
-
-    if (category === "inProgress") {
-        let books = JSON.parse(localStorage.getItem("inProgressBooks")) || [];
-        activeSection.innerHTML = books.map(book => `
-            <div class="book-item">
-                <p>${book.title}</p>
-                <input type="range" id="progress-bar-${book.id}" min="0" max="100" value="${book.progress || 0}" 
-                    onchange="updateProgress('${book.id}', this.value)">
-                <span id="progress-label-${book.id}">${book.progress || 0}%</span>
-            </div>
-        `).join("");
+    if (activeSection) {
+        activeSection.style.display = "block";
+    } else {
+        console.error(`Section ${category}Books not found!`);
     }
+
+    displayLibraryBooks(category);
 }
 
-window.onload = function () {
-    displayLibraryBooks();
-    showCategory('inProgress');
-};
-
-// Add a button to update progress (In Progress to Finished)
-// Create the button for Saved books to move to "In Progress"
 function createSaveButton(book) {
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save to Progress"; // Always show "Save to Progress"
@@ -537,5 +481,21 @@ function updateReadingProgress(book, progress) {
 }
 
 
-localStorage.clear();
+document.addEventListener("DOMContentLoaded", function () {
+    clearSections();
+});
 
+function clearSections() {
+    document.getElementById("savedBooks").innerHTML = "";
+    document.getElementById("inProgressBooks").innerHTML = "";
+    document.getElementById("finishedBooks").innerHTML = "";
+}
+
+function showSection(sectionId) {
+    clearSections();
+    let section = document.getElementById(sectionId);
+    if (section.children.length === 0) {
+        section.innerHTML = "<p>No books in this section</p>";
+    }
+    section.style.display = "block";
+}
